@@ -12,6 +12,10 @@ var token = config.telegram.token;
 var bot = new TelegramBot(token);
 var lastSend;
 
+app.get('/', function(req, res){
+	return res.status(200).json({lastSend: lastSend});
+});
+
 every('5s').do(function() {
     var data = [];
     request(targetUrl, function(error, response, html){
@@ -42,5 +46,5 @@ every('5s').do(function() {
     });
 });
 
-app.listen('8081');
+app.listen(process.env.PORT || 5000);
 exports = module.exports = app;
