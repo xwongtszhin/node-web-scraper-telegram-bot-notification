@@ -31,11 +31,9 @@ every('5s').do(function() {
                     }
                     for( id in chatID){
                         bot.sendMessage(chatID[id], data[0].word + "\n" + data[0].link + "\n" + data[0].datetime).then(function(resp){
-                            
                         }).catch(function(error) {
-                            if (error.response && error.response.statusCode === 403) {
-                                 console.log('bot was blocked by the user');
-                        }});
+                            if (error.response && error.response.statusCode === 403) console.log('bot was blocked by the user');
+                        });
                     }
                 });
                 lastSend = new Date(data[0].datetime).getTime();
