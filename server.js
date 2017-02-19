@@ -7,7 +7,7 @@ var _           = require('lodash');
 var TelegramBot = require('node-telegram-bot-api');
 var app         = express();
 
-var targetUrl = 'https://www.biyroamer.com/category/adidas/ultra-boost';
+var targetUrl = config.targetUrl;;
 var token = config.telegram.token;
 var bot = new TelegramBot(token);
 var lastSend;
