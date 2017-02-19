@@ -1,18 +1,22 @@
 {
-  "name": "node-web-scrape",
+  "name": "node-web-scraper-telegram-bot-notification",
   "version": "0.0.1",
-  "description": "Scrape le web.",
+  "description": "node-web-scraper-telegram-bot-notification",
   "main": "server.js",
-  "author": "hehe",
+  "author": "hugo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scotch-io/node-web-scraper"
+    "url": "git+https://github.com/xwongtszhin/node-web-scraper-telegram-bot-notification"
   },
   "dependencies": {
     "cheerio": "latest",
     "express": "latest",
     "lodash": "^4.17.4",
     "node-telegram-bot-api": "^0.27.0",
-    "request": "latest"
+    "request": "latest",
+    "schedule": "^0.1.0"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
