@@ -1,6 +1,7 @@
 module.exports = {
     telegram:{
-        token:'$TOKEN' 
+        token:'$TOKEN',
+        groupName:'$groupName'
     },
     targetUrl :'https://www.biyroamer.com/category/adidas/ultra-boost'
 };
