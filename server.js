@@ -3,12 +3,12 @@ var express     = require('express');
 var request     = require('request');
 var cheerio     = require('cheerio');
 var config      = require('./config.js');
-var _           = require('lodash');
 var TelegramBot = require('node-telegram-bot-api');
 var app         = express();
 
 var targetUrl = config.targetUrl;;
 var token = config.telegram.token;
+var groupName = config.telegram.groupName;
 var bot = new TelegramBot(token);
 var lastSend;
 
@@ -28,19 +28,11 @@ every('5s').do(function() {
                 data[index].datetime = value.attribs.datetime;
             });
             if (lastSend != new Date(data[0].datetime).getTime()){
-                var chatID = []; 
-                bot.getUpdates().then(function(result){
-                    for(i in result){
-                        chatID = _.union(chatID, [result[i].message.chat.id]);
-                    }
-                    for( id in chatID){
-                        bot.sendMessage(chatID[id], data[0].word + "\n" + data[0].link + "\n" + data[0].datetime).then(function(resp){
-                        }).catch(function(error) {
-                            if (error.response && error.response.statusCode === 403) console.log('bot was blocked by the user');
-                        });
-                    }
-                });
-                lastSend = new Date(data[0].datetime).getTime();
+		bot.sendMessage(groupName, data[0].word + "\n" + data[0].link + "\n" + data[0].datetime).then(function(resp){
+		}).catch(function(error) {
+		    if (error.response && error.response.statusCode === 403) console.log('bot was blocked by the user');
+		});
+	    lastSend = new Date(data[0].datetime).getTime();
             }
         }
     });
