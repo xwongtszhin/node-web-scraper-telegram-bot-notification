@@ -34,7 +34,6 @@ every('15s').do(function () {
                             "datetime": null
                         });
                     });
-                1
                 $('.entry-date.updated')
                     .first()
                     .filter(function (index, value) {
