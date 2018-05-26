@@ -15,7 +15,9 @@ var lastSend;
 var time;
 
 app.get('/', function (req, res) {
-    return res.status(200).json({ lastSend: lastSend });
+    return res.status(200).json({
+        lastSend: lastSend
+    });
 });
 every('15s').do(function () {
     var data = [];
@@ -23,12 +25,21 @@ every('15s').do(function () {
         if (!error) {
             try {
                 var $ = cheerio.load(html);
-                $('.post-title.entry-title').first().filter(function (index, value) {
-                    data.push({ "link": value.children[0].attribs.href, "word": value.children[0].children[0].data, "datetime": null });
-                });
-                $('.entry-date.updated').first().filter(function (index, value) {
-                    data[index].datetime = value.attribs.datetime;
-                });
+                $('.post-title.entry-title')
+                    .first()
+                    .filter(function (index, value) {
+                        data.push({
+                            "link": value.children[0].attribs.href,
+                            "word": value.children[0].children[0].data,
+                            "datetime": null
+                        });
+                    });
+                1
+                $('.entry-date.updated')
+                    .first()
+                    .filter(function (index, value) {
+                        data[index].datetime = value.attribs.datetime;
+                    });
                 time = new Date(data[0].datetime).getTime();
                 if (lastSend != time)
                     telegramSend(data);
@@ -38,13 +49,15 @@ every('15s').do(function () {
         }
     });
 });
+
 function telegramSend(data) {
-    bot.sendMessage(groupName, data[0].word + "\n" + data[0].link + "\n" + data[0].datetime).then(function (resp) {
-        lastSend = time;
-    }).catch(function (error) {
-        if (error.response && error.response.statusCode === 403)
-            console.log('bot was blocked by the user');
-    });
+    bot.sendMessage(groupName, data[0].word + "\n" + data[0].link + "\n" + data[0].datetime)
+        .then(function (resp) {
+            lastSend = time;
+        }).catch(function (error) {
+            if (error.response && error.response.statusCode === 403)
+                console.log('bot was blocked by the user');
+        });
 };
 
 app.listen(process.env.PORT || 5000);
