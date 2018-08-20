@@ -1,9 +1,12 @@
-# node-web-scraper-telegram-bot-notification
-
+# (Web Scraper) NodeJS with Telegram Bot Notification
 Simple web scraper to get the update of shoes information from biyroamer.
 
-Address:https://www.biyroamer.com/category/adidas/ultra-boost
+Url:https://www.biyroamer.com
 
-It's need to set the telegram bot token and the target group id.
+## Getting Started
+1. Install `nodejs`, `npm` and `yarn`
+2. Run yarn install `yarn install`
+3. Go to config.js set the telegram variable 
+4. `npm start`
 
-![capture111](https://cloud.githubusercontent.com/assets/10266845/26386375/07ef1934-4079-11e7-9265-99f7dd6d4550.PNG)
+![123123](https://user-images.githubusercontent.com/10266845/44355407-21692000-a4df-11e8-8a1c-79b584da3fa3.png)

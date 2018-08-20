@@ -3,5 +3,5 @@ module.exports = {
         token:'',
         groupName:''
     },
-    targetUrl :'https://www.biyroamer.com/category/adidas/ultra-boost'
+    targetUrl :'https://www.biyroamer.com'
 };
