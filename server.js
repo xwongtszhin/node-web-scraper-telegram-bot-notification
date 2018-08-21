@@ -2,13 +2,13 @@ const every = require('schedule').every;
 const express = require('express');
 const request = require('request');
 const cheerio = require('cheerio');
-const config = require('./config.js');
 const TelegramBot = require('node-telegram-bot-api');
+require('dotenv').config();
 const app = express();
 
-const targetUrl = config.targetUrl;
-const token = config.telegram.token;
-const groupName = config.telegram.groupName;
+const targetUrl = process.env.TARGET_URL;
+const token = process.env.TELEGRAM_TOKEN;
+const groupName = process.env.TELEGRAM_GROUP_NAME;
 const bot = new TelegramBot(token);
 let lastDateTime;
 
@@ -38,10 +38,10 @@ every('5s').do(() => {
             if (lastDateTime != dateTime)
                 sendTelegramMessage(data);
         }
-    })
+    });
 });
 
-var sendTelegramMessage = (data => {
+const sendTelegramMessage = (data => {
     bot
         .sendMessage(
             groupName, [
