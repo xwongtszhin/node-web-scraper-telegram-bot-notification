@@ -11,9 +11,9 @@ const token = process.env.TELEGRAM_TOKEN;
 const groupName = process.env.TELEGRAM_GROUP_NAME;
 const bot = new TelegramBot(token);
 let lastDateTime;
+let dateTime;
 
-every('10s').do(() => {
-
+every('20s').do(() => {
     request(targetUrl, (error, response, html) => {
         if (!error && response.statusCode == 200) {
 
@@ -33,7 +33,7 @@ every('10s').do(() => {
                     data.dateTime = value.attribs.datetime;
                 });
 
-            let dateTime = new Date(data.dateTime).getTime();
+            dateTime = new Date(data.dateTime).getTime();
 
             if (lastDateTime != dateTime)
                 sendTelegramMessage(data);
@@ -45,15 +45,15 @@ const sendTelegramMessage = (data => {
     bot
         .sendMessage(
             groupName, [
-                data.word,
+                data.title,
                 data.url,
                 data.dateTime
             ].join('\n')
         )
         .then(resp => {
-            lastDateTime = data.dateTime;
+            lastDateTime = dateTime;
         })
-        .catch(error => {});
+        .catch(error => { });
 });
 
 app.listen(process.env.PORT || 3000);
