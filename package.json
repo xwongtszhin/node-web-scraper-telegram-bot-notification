@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "cheerio": "latest",
-    "dotenv": "^6.0.0",
+    "dotenv": "^8.0.0",
     "express": "latest",
     "node-telegram-bot-api": "^0.30.0",
     "request": "latest",
