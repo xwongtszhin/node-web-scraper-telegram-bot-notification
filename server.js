@@ -26,7 +26,7 @@ schedule.scheduleJob('20 * * * * *', async () => {
         date, title, link, id,
       } = response.data[0];
       if (id > latestId) {
-        bot.sendMessage(groupName, [title, link, date].join('\n')).then(() => {
+        bot.sendMessage(groupName, [title.rendered, link, date].join('\n')).then(() => {
           latestId = id;
         });
       }
